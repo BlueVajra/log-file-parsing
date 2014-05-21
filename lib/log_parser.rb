@@ -28,9 +28,11 @@ class LogParser
     log_hashes = []
     log_array.each do |log|
       log_hash = {}
-      log_hash[:log_level_char] = log.slice!(/^[A-Z]/)
-      puts log
+      log_hash[:log_level_char] = log.slice!(/^[A-Z]+,/).gsub(',', '')
 
+      date_info = log.slice!(/\[.*?\]/).gsub('[', '').gsub(']', '').split(' ')
+
+      log_hash[:date] = date_info[0]
       log_hashes << log_hash
     end
 

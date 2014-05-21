@@ -17,11 +17,20 @@ LOGS
     expect(actual).to eq expected
 
   end
-  it "parses the logs" do
+  it "parses the logs and gets log_chars" do
     #[log level char], [<date> #<processid>]  <log level> -- : <message>
     log_hash = LogParser.new(@logs)
     actual = log_hash.log_chars
     expected = ["W","Z"]
+
+    expect(actual).to eq expected
+
+  end
+  it "parses the logs and gets dates" do
+    #[log level char], [<date> #<processid>]  <log level> -- : <message>
+    log_hash = LogParser.new(@logs)
+    actual = log_hash.dates
+    expected = ["2014-05-10T13:49:19.049260","2014-05-10T13:49:19.049408"]
 
     expect(actual).to eq expected
 
